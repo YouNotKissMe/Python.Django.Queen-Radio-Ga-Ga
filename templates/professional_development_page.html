@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'home_page.html' %}
+    {% block name %}
+    <title>Повышение квалификации</title>
+    {% endblock %}
+</head>
+<body>
+{% block test %}
+<div class="container">
+<table class = "table table-hover">
+    <thead>
+        <tr>
+        <td >Дата окончания</td>
+        <td>Образовательная организация</td>
+        <td>Наименование программы/темы</td>
+        <td>Срок обучения(мес.)</td>
+        <td>Колличество часов</td>
+            <td>№ Документа</td>
+            <td>Направление саморазвития</td>
+            <td>Действие</td>
+        </tr>
+    </thead>
+    {% for a in pd %}
+    <tbody>
+        <tr>
+        <td>
+        {{ a.date }}
+        </td>
+            <td>{{  a.educational_organization}}</td>
+        <td>{{ a.name_theme }}  </td>
+        <td>{{ a.duration_of_training }}  </td>
+            <td>{{ a.number_of_hours }}  </td>
+            <td>{{ a.number_document }}  </td>
+            <td>{{ a.the_direction_of_self_development }}  </td>
+        <td><a href="{% url 'update_pd' a.pk %}"> Изменить</a>/<a href="{%  url 'delete_pd' a.id %}">Удалить</a>
+        </td>
+
+        </tr>
+    </tbody>
+    {% endfor %}
+    </table>
+</div>
+    <div class="container">
+    <button class="btn btn-outline-success" type="submit" onclick="window.location.href={% url 'addpd' %}">
+                    Добавить достижение
+                </button>
+    </div>
+{% endblock %}
+</body>
+</html>

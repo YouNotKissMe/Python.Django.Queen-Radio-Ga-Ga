@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'home_page.html' %}
+    {% block name %}
+        <title>Достижения</title>
+    {% endblock %}
+</head>
+<body>
+{% block test %}
+    <div class="container">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <td>Уровень</td>
+                <td>Образовательная организация</td>
+                <td>Факультет</td>
+                <td>Специализация</td>
+                <td>Год окончания</td>
+                <td>Действие</td>
+            </tr>
+            </thead>
+            {% for a in ed %}
+                <tbody>
+                <tr>
+                    <td>
+                        {{ a.level }}
+                    </td>
+                    <td>{{ a.educational_organization }}</td>
+                    <td>{{ a.faculty }}</td>
+                    <td>{{ a.specialization }}  </td>
+                    <td>{{ a.date }}  </td>
+                    <td><a href="{% url 'update_ed' a.pk %}"> Изменить</a>/<a href="{% url 'delete_ed' a.id %}">Удалить</a>
+                    </td>
+
+                </tr>
+                </tbody>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="container">
+        <button class="btn btn-outline-success" type="submit" onclick="window.location.href={% url 'addeducate' %}">
+            Добавить образование
+        </button>
+    </div>
+{% endblock %}
+</body>
+</html>

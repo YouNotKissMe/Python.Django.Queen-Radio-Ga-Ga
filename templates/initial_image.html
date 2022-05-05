@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'home_page.html' %}
+    <meta charset="UTF-8">
+    {% block name %}
+        <title>Добавление достижения</title>
+    {% endblock %}
+</head>
+<body>
+{% block test %}
+    <div class='container'>
+
+        {% if request.user.is_authenticated %}
+            <form action="{% url 'initial' %}" method="get" >
+
+                Введите за какой период (в годах) вы хотите произвести вывода прогресса
+                (первое число должно быть меньше, чем второе)
+
+                <p><input name="start">
+                    <input name="end">
+                </p>
+                <input type="submit" value="отправить">
+
+            </form>
+        {% else %}
+            <meta http-equiv="refresh" content="0;{% url 'log' %}">
+        {% endif %}
+
+    </div>
+{% endblock %}
+</body>
+</html>

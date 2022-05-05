@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends 'home_page.html' %}
+    {% block name %}
+    <title>Достижения</title>
+    {% endblock %}
+</head>
+<body>
+{% block test %}
+<div class="container">
+<table class = "table table-hover">
+    <thead>
+        <tr>
+        <td >Тип</td>
+        <td>Наименование</td>
+        <td>Дата получения</td>
+        <td>Направление саморазвитиия</td>
+        <td>Действие</td>
+        </tr>
+    </thead>
+    {% for a in ach %}
+    <tbody>
+        <tr>
+        <td>
+        {{ a.achievements_type }}
+        </td>
+            <td><a href="{{ a.file.url }}" download = "mmm">{{ a.name }}</a></td>
+        <td>{{ a.date_of_receiving }}  </td>
+        <td>{{ a.the_direction_of_self_development }}  </td>
+        <td><a href="{% url 'update' a.pk %}"> Изменить</a>/<a href="{%  url 'delete' a.id %}">Удалить</a>
+        </td>
+
+        </tr>
+    </tbody>
+    {% endfor %}
+    </table>
+</div>
+    <div class="container">
+    <button class="btn btn-outline-success" type="submit" onclick="window.location.href={% url 'nerabotaet' %}">
+                    Добавить достижение
+                </button>
+    </div>
+{% endblock %}
+</body>
+</html>

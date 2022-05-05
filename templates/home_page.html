@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    {% load static %}
+    <link href="{% static 'bootstrap-5.1.3-examples/assets/dist/css/bootstrap.min.css' %}" rel="stylesheet"
+          crossorigin="anonymous">
+    <script src="{% static 'bootstrap-5.1.3-examples/assets/dist/js/bootstrap.bundle.min.js' %}"
+            crossorigin="anonymous"></script>
+    {% block name %}
+        <title>Профиль</title>
+    {% endblock %}
+</head>
+<body>
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-bs-toggle="dropdown" aria-expanded="false">
+                            Профиль
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'home2' %}">Основные данные</a></li>
+                            <li><a class="dropdown-item" href="{% url 'educate' %}">Образование</a></li>
+                            <li><a class="dropdown-item" href="{% url 'pd' %}">Повышение квалификации</a></li>
+                            <li><a class="dropdown-item" href="{% url 'ach' %}">Достижения</a></li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'initial' %}">Анализ уровня педагогического саморазвития</a>
+                    </li>
+
+                </ul>
+
+
+                <button class="btn btn-outline-success" type="submit" onclick="window.location.href={% url 'logout' %}">
+                    Выход
+                </button>
+
+            </div>
+        </div>
+    </nav>
+
+
+</div>
+{% block test %}
+    <div class="container">
+        {% if user.profile.gender_model %}
+            <h1>Пол : {{ user.profile.gender_model }}</h1>
+        {% endif %}
+        {% if user.profile.first_name %}
+            <h1>Имя : {{ user.profile.first_name }}</h1>
+        {% endif %}
+        {% if user.profile.last_name %}
+            <h1>Фамилия : {{ user.profile.last_name }}</h1>
+        {% endif %}
+        {% if user.profile.patronymic %}
+            <h1>Отчество : {{ user.profile.patronymic }}</h1>
+        {% endif %}
+        {% if user.profile.birth_date %}
+            <h1>Дата рождения : {{ user.profile.birth_date }}</h1>
+        {% endif %}
+        {% if user.profile.job %}
+            <h1>Текущая должность : {{ user.profile.job }}</h1>
+        {% endif %}
+        {% if user.profile.work_place %}
+            <h1>Место работы(филиал) : {{ user.profile.work_place }}</h1>
+        {% endif %}
+        {% if user.profile.date %}
+            <h1>Педагогический стаж (лет) : {{ year }}</h1>
+            <h1>Педагогический стаж (месяцев) : {{ mon }}</h1>
+        {% endif %}
+        {% if user.profile.telephone %}
+            <h1>Номер телефона : {{ user.profile.telephone }}</h1>
+        {% endif %}
+
+    </div>
+    {% if user.profile.pk %}
+        <div class="container">
+            <a href=" {% url 'updateyou' user.profile.pk %}">
+                Изменить данные
+            </a>
+        </div>
+    {% else %}
+        <div class="container">
+            <button class="btn btn-outline-success" type="submit" onclick="window.location.href={% url 'add_you' %}">
+                Добавить данные
+            </button>
+        </div>
+    {% endif %}
+{% endblock %}
+
+</body>
+</html>
